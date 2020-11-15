@@ -11,6 +11,6 @@ import java.util.UUID;
 @Repository
 public interface TeamRepository extends CrudRepository<Team, UUID> {
 
-    @Query("select * from tbl_team where player = :organizer")
-    Team findByOrganizer(@Param("organizer") UUID organizerId);
+    @Query("select * from tbl_team where organizer = :organizer and name = :name")
+    Team findByOrganizer(@Param("organizer") UUID organizerId, @Param("name") String name);
 }

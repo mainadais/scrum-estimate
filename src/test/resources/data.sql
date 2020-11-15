@@ -31,61 +31,85 @@ values (uuid_generate_v4(), 'cassie', 'cassie_password',
 on conflict do nothing;
 
 --create teams
-insert into tbl_team (id, name, organization, player, player_key, date_created)
+insert into tbl_team (id, name, organization, organizer, date_created)
 values (uuid_generate_v4(), 'cassie_team_1', null,
-        (select id from tbl_player where email_address = 'cassie_email@email.com'), 0, current_timestamp)
+        (select id from tbl_player where email_address = 'cassie_email@email.com'), current_timestamp)
 on conflict do nothing;
 
-insert into tbl_team (id, name, organization, player, player_key, date_created)
+insert into tbl_team (id, name, organization, organizer, date_created)
+values (uuid_generate_v4(), 'cassie_team_2', null,
+        (select id from tbl_player where email_address = 'cassie_email@email.com'), current_timestamp)
+on conflict do nothing;
+
+insert into tbl_team (id, name, organization, organizer, date_created)
 values (uuid_generate_v4(), 'jacob_team_1', null,
-        (select id from tbl_player where email_address = 'jacob_email@email.com'), 0, current_timestamp)
+        (select id from tbl_player where email_address = 'jacob_email@email.com'), current_timestamp)
 on conflict do nothing;
 
-insert into tbl_team (id, name, organization, player, player_key, date_created)
+insert into tbl_team (id, name, organization, organizer, date_created)
+values (uuid_generate_v4(), 'jacob_team_2', null,
+        (select id from tbl_player where email_address = 'jacob_email@email.com'), current_timestamp)
+on conflict do nothing;
+
+insert into tbl_team (id, name, organization, organizer, date_created)
 values (uuid_generate_v4(), 'melissa_team_1', null,
-        (select id from tbl_player where email_address = 'melissa_email@email.com'), 0, current_timestamp)
+        (select id from tbl_player where email_address = 'melissa_email@email.com'), current_timestamp)
 on conflict do nothing;
 
-insert into tbl_team (id, name, organization, player, player_key, date_created)
+insert into tbl_team (id, name, organization, organizer, date_created)
+values (uuid_generate_v4(), 'melissa_team_2', null,
+        (select id from tbl_player where email_address = 'melissa_email@email.com'), current_timestamp)
+on conflict do nothing;
+
+insert into tbl_team (id, name, organization, organizer, date_created)
 values (uuid_generate_v4(), 'steve_team_1', null,
-        (select id from tbl_player where email_address = 'steve_email@email.com'), 0, current_timestamp)
+        (select id from tbl_player where email_address = 'steve_email@email.com'), current_timestamp)
 on conflict do nothing;
 
---create participants for cassie's scrum
-insert into tbl_participant (id, player, team)
+insert into tbl_team (id, name, organization, organizer, date_created)
+values (uuid_generate_v4(), 'steve_team_2', null,
+        (select id from tbl_player where email_address = 'steve_email@email.com'), current_timestamp)
+on conflict do nothing;
+
+--create participants for cassie's scrum using team_1
+insert into tbl_participant (id, player, team, tbl_team_key)
 values (uuid_generate_v4(),
         (select pl.id from tbl_player pl where pl.email_address = 'steve_email@email.com'),
         (select team.id
          from tbl_team team
-                  inner join tbl_player player on player.id = team.player and team.player_key = 0
-         where player.email_address = 'cassie_email@email.com'))
+                  inner join tbl_player player on player.id = team.organizer
+         where player.email_address = 'cassie_email@email.com'
+           and team.name = 'cassie_team_1'), 0)
 on conflict do nothing;
 
-insert into tbl_participant (id, player, team)
+insert into tbl_participant (id, player, team, tbl_team_key)
 values (uuid_generate_v4(),
         (select pl.id from tbl_player pl where pl.email_address = 'melissa_email@email.com'),
         (select team.id
          from tbl_team team
-                  inner join tbl_player player on player.id = team.player and team.player_key = 0
-         where player.email_address = 'cassie_email@email.com'))
+                  inner join tbl_player player on player.id = team.organizer
+         where player.email_address = 'cassie_email@email.com'
+           and team.name = 'cassie_team_1'), 0)
 on conflict do nothing;
 
-insert into tbl_participant (id, player, team)
+insert into tbl_participant (id, player, team, tbl_team_key)
 values (uuid_generate_v4(),
         (select pl.id from tbl_player pl where pl.email_address = 'jacob_email@email.com'),
         (select team.id
          from tbl_team team
-                  inner join tbl_player player on player.id = team.player and team.player_key = 0
-         where player.email_address = 'cassie_email@email.com'))
+                  inner join tbl_player player on player.id = team.organizer
+         where player.email_address = 'cassie_email@email.com'
+           and team.name = 'cassie_team_1'), 0)
 on conflict do nothing;
 
-insert into tbl_participant (id, player, team)
+insert into tbl_participant (id, player, team, tbl_team_key)
 values (uuid_generate_v4(),
         (select pl.id from tbl_player pl where pl.email_address = 'cassie_email@email.com'),
         (select team.id
          from tbl_team team
-                  inner join tbl_player player on player.id = team.player and team.player_key = 0
-         where player.email_address = 'cassie_email@email.com'))
+                  inner join tbl_player player on player.id = team.organizer
+         where player.email_address = 'cassie_email@email.com'
+           and team.name = 'cassie_team_1'), 0)
 on conflict do nothing;
 
 --create votes

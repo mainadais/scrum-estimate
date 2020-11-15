@@ -26,6 +26,6 @@ public class TeamRepositoryTest {
     public void testFindAllTeams() {
         List<Team> teams = new ArrayList<>();
         teamRepository.findAll().forEach(teams::add);
-        assertThat(teams.size(), Is.is(4));
+        assertThat(teams.size(), Is.is(8));
     }
 }

@@ -12,9 +12,12 @@ import java.util.UUID;
 @Repository
 public interface PlayerRepository extends CrudRepository<Player, UUID> {
 
-    @Query("select pl.* from tbl_participant pt inner join tbl_player pl on pt.player = pl.id where pt.team = :teamId")
+    @Query("select * from tbl_participant pt left outer join tbl_player pl on pt.player = pl.id where pt.team = :teamId")
     List<Player> findPlayersByTeam(@Param("teamId") UUID teamId);
 
-    @Query("select id from tbl_player where email_address = :email")
-    UUID findPlayerIdByEmail(@Param("email") String emailAddress);
+    @Query("select * from tbl_player pl where pl.email_address = :email")
+    Player findPlayerByEmail(@Param("email") String emailAddress);
+
+    @Query("select * from tbl_player pl left outer join tbl_account acc on acc.player = pl.id where acc.username = :username")
+    Player findPlayerByUsername(@Param("username") String username);
 }

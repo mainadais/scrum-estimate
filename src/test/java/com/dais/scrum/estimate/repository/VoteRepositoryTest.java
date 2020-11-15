@@ -30,7 +30,7 @@ public class VoteRepositoryTest {
     }
 
     @Test
-    public void testFindVotesByScrum(){
+    public void testFindVotesByScrum() {
         List<Vote> votes = voteRepository.findVotesByScrum("cassie scrum");
         assertThat(votes.size(), Is.is(4));
         votes = voteRepository.findVotesByScrum("cassie-no exist scrum");
