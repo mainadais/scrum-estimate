@@ -1,0 +1,114 @@
+query findByEmail($emailAddress: String!){
+    findByEmail(emailAddress: $emailAddress){
+        data{
+            id
+            emailAddress
+            firstName
+            lastName
+            role
+            dateCreated
+            account {
+                id
+                username
+                status
+            }
+        }
+        error
+    }
+}
+
+query findById($playerId: ID!){
+    findById(playerId: $playerId){
+        data{
+            id
+            emailAddress
+            firstName
+            lastName
+            role
+            dateCreated
+            account {
+                id
+                username
+                status
+            }
+        }
+        error
+    }
+}
+
+query findByUsername ($username: String!){
+    findByUsername (username: $username){
+        data{
+            id
+            emailAddress
+            firstName
+            lastName
+            role
+            dateCreated
+            account {
+                id
+                username
+                status
+            }
+        }
+        error
+    }
+}
+
+query findPlayersByTeam ($teamId: ID!){
+    findPlayersByTeam (teamId: $teamId){
+        data{
+            id
+            firstName
+            lastName
+            role
+        }
+        error
+    }
+}
+
+query findTeamById ($teamId: ID!){
+    findTeamById (teamId: $teamId){
+        data{
+            id
+            name
+            organization
+            organizer
+            participants{
+                id
+                player
+                team
+            }
+        }
+        error
+    }
+}
+
+query findByOrganizer ($organizerId: ID!, $teamName: String!){
+    findByOrganizer (organizerId: $organizerId, teamName: $teamName){
+        data{
+            id
+            name
+            organization
+            organizer
+            participants{
+                id
+                player
+                team
+            }
+        }
+        error
+    }
+}
+
+query getScrumVotes ($scrum: String!){
+    getScrumVotes (scrum: $scrum){
+        data{
+            id
+            participant
+            scrum
+            vote
+        }
+        error
+    }
+}

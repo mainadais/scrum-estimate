@@ -28,5 +28,5 @@ public interface PlayerService {
 
     Result<List<Player>> findPlayersByTeam(UUID teamId);
 
-    Result<Integer> deletePlayer(UUID teamId);
+    Result<Integer> deletePlayer(UUID playerId);
 }

@@ -1,0 +1,339 @@
+{
+  "variables": {
+	"findByEmail": {
+	  "emailAddress": "cassie_email@email.com"
+	},
+	"findById": {
+	  "playerId": "6bf437e1-1b71-469c-8537-700665a279de"
+	},
+	"findByUsername": {
+	  "username": "cassie"
+	},
+	"findByOrganizer": {
+	  "organizerId": "6bf437e1-1b71-469c-8537-700665a279de",
+	  "teamName": "cassie_team_1"
+	},
+	"findPlayersByTeam": {
+	  "teamId": "a216d5bb-43ef-455c-b018-b1e99aa39cc9"
+	},
+	"findTeamById": {
+	  "teamId": "a216d5bb-43ef-455c-b018-b1e99aa39cc9"
+	},
+	"getScrumVotes": {
+	  "scrum": "cassie scrum"
+	}
+  },
+  "queryResults": {
+	"findById": {
+	  "data": {
+		"id": "6bf437e1-1b71-469c-8537-700665a279de",
+		"firstName": "jennie",
+		"lastName": "bean",
+		"emailAddress": "cassie_email@email.com",
+		"account": {
+		  "id": "07e81272-8a06-4d29-924d-cdc47af7f4be",
+		  "username": "cassie",
+		  "status": "active"
+		},
+		"role": "admin"
+	  },
+	  "error": null
+	},
+	"findByUsername": {
+	  "data": {
+		"id": "6bf437e1-1b71-469c-8537-700665a279de",
+		"emailAddress": "cassie_email@email.com",
+		"firstName": "jennie",
+		"lastName": "bean",
+		"role": "admin",
+		"dateCreated": "2020-11-15 12:30:21.06455",
+		"account": null
+	  },
+	  "error": null
+	},
+	"findByEmail": {
+	  "data": {
+		"id": "6bf437e1-1b71-469c-8537-700665a279de",
+		"emailAddress": "cassie_email@email.com",
+		"firstName": "jennie",
+		"lastName": "bean",
+		"role": "admin",
+		"dateCreated": "2020-11-15 12:30:21.06455",
+		"account": null
+	  },
+	  "error": null
+	},
+	"findByOrganizer": {
+	  "data": {
+		"id": "a216d5bb-43ef-455c-b018-b1e99aa39cc9",
+		"name": "cassie_team_1",
+		"organizer": "6bf437e1-1b71-469c-8537-700665a279de",
+		"organization": null,
+		"dateCreated": "2020-11-15 12:30:21.076863",
+		"participants": [
+		  {
+			"id": "cf5c44ea-fea8-4507-981b-08308cd4c0ce",
+			"player": "ce47a19e-027e-4d18-9b6b-a68e13a31824",
+			"team": "a216d5bb-43ef-455c-b018-b1e99aa39cc9"
+		  },
+		  {
+			"id": "427ffa4a-ff64-4031-b4dd-a647de93ce48",
+			"player": "23f8865a-67b1-4ce6-afe6-a28e0f3a5964",
+			"team": "a216d5bb-43ef-455c-b018-b1e99aa39cc9"
+		  },
+		  {
+			"id": "a1a82f0a-0f27-4e90-8fbb-2490386045ab",
+			"player": "fa01ac6c-6178-4b82-827e-9b3b75822bd6",
+			"team": "a216d5bb-43ef-455c-b018-b1e99aa39cc9"
+		  },
+		  {
+			"id": "036a909f-1d47-4ff6-b4bf-5b42addca334",
+			"player": "6bf437e1-1b71-469c-8537-700665a279de",
+			"team": "a216d5bb-43ef-455c-b018-b1e99aa39cc9"
+		  }
+		]
+	  },
+	  "error": null
+	}
+  },
+  "findPlayersByTeam": {
+	"data": [
+	  {
+		"id": "a1a82f0a-0f27-4e90-8fbb-2490386045ab",
+		"firstName": "jacob_first",
+		"lastName": "jacob_last",
+		"role": "guest"
+	  },
+	  {
+		"id": "427ffa4a-ff64-4031-b4dd-a647de93ce48",
+		"firstName": "melissa_first",
+		"lastName": "melissa_last",
+		"role": "guest"
+	  },
+	  {
+		"id": "cf5c44ea-fea8-4507-981b-08308cd4c0ce",
+		"firstName": "steve_first",
+		"lastName": "steve_last",
+		"role": "guest"
+	  },
+	  {
+		"id": "036a909f-1d47-4ff6-b4bf-5b42addca334",
+		"firstName": "jennie",
+		"lastName": "bean",
+		"role": "admin"
+	  }
+	],
+	"error": null
+  },
+  "findTeamById": {
+	"data": {
+	  "id": "a216d5bb-43ef-455c-b018-b1e99aa39cc9",
+	  "name": "cassie_team_1",
+	  "organization": null,
+	  "organizer": "6bf437e1-1b71-469c-8537-700665a279de",
+	  "participants": [
+		{
+		  "id": "cf5c44ea-fea8-4507-981b-08308cd4c0ce",
+		  "player": "ce47a19e-027e-4d18-9b6b-a68e13a31824",
+		  "team": "a216d5bb-43ef-455c-b018-b1e99aa39cc9"
+		},
+		{
+		  "id": "427ffa4a-ff64-4031-b4dd-a647de93ce48",
+		  "player": "23f8865a-67b1-4ce6-afe6-a28e0f3a5964",
+		  "team": "a216d5bb-43ef-455c-b018-b1e99aa39cc9"
+		},
+		{
+		  "id": "a1a82f0a-0f27-4e90-8fbb-2490386045ab",
+		  "player": "fa01ac6c-6178-4b82-827e-9b3b75822bd6",
+		  "team": "a216d5bb-43ef-455c-b018-b1e99aa39cc9"
+		},
+		{
+		  "id": "036a909f-1d47-4ff6-b4bf-5b42addca334",
+		  "player": "6bf437e1-1b71-469c-8537-700665a279de",
+		  "team": "a216d5bb-43ef-455c-b018-b1e99aa39cc9"
+		}
+	  ]
+	},
+	"error": null
+  },
+  "getScrumVotes": {
+	"data": [
+	  {
+		"id": "fba3e41b-bd2c-4248-9c9f-9a805a6b6bb6",
+		"participant": "cf5c44ea-fea8-4507-981b-08308cd4c0ce",
+		"scrum": "cassie scrum",
+		"vote": 10
+	  },
+	  {
+		"id": "79bc2c75-f94b-4a75-8448-b19a8f0e56c2",
+		"participant": "427ffa4a-ff64-4031-b4dd-a647de93ce48",
+		"scrum": "cassie scrum",
+		"vote": 10
+	  },
+	  {
+		"id": "55a6a685-7da9-4f82-a354-8e66f779ce2d",
+		"participant": "a1a82f0a-0f27-4e90-8fbb-2490386045ab",
+		"scrum": "cassie scrum",
+		"vote": 10
+	  },
+	  {
+		"id": "bf91aa36-f869-4861-8ae3-986066032c5c",
+		"participant": "036a909f-1d47-4ff6-b4bf-5b42addca334",
+		"scrum": "cassie scrum",
+		"vote": 10
+	  }
+	],
+	"error": null
+  },
+  "mutationResults": {
+	"createPlayer": {
+	  "data": {
+		"id": "90db40a2-7280-41e6-bbbe-9d55550759c8",
+		"firstName": "sukuma",
+		"lastName": "wiki",
+		"emailAddress": "sukuma_email@email.com",
+		"account": null,
+		"role": "guest",
+		"dateCreated": "Sun Nov 15 16:27:51 CST 2020"
+	  }
+	},
+	"addAccount": {
+	  "data": {
+		"id": "90db40a2-7280-41e6-bbbe-9d55550759c8",
+		"firstName": "sukuma",
+		"lastName": "wiki",
+		"emailAddress": "sukuma_email@email.com",
+		"account": {
+		  "id": "bea971c7-388f-4532-9069-c818d5ac2b41",
+		  "username": "sukuma"
+		},
+		"role": "guest",
+		"dateCreated": "2020-11-15 16:27:51.436"
+	  }
+	},
+	"updatePassword": {
+	  "data": {
+		"id": "90db40a2-7280-41e6-bbbe-9d55550759c8",
+		"firstName": "sukuma",
+		"lastName": "wiki",
+		"emailAddress": "sukuma_email@email.com",
+		"account": {
+		  "id": "bea971c7-388f-4532-9069-c818d5ac2b41",
+		  "username": "sukuma",
+		  "password": "patapata"
+		},
+		"role": "guest",
+		"dateCreated": "2020-11-15 16:27:51.436"
+	  }
+	},
+	"updatePlayer": {
+	  "data": {
+		"id": "90db40a2-7280-41e6-bbbe-9d55550759c8",
+		"firstName": "washa",
+		"lastName": "moto",
+		"emailAddress": "sukuma_email@email.com",
+		"account": {
+		  "id": "bea971c7-388f-4532-9069-c818d5ac2b41",
+		  "username": "sukuma",
+		  "password": "patapata"
+		},
+		"role": "guest",
+		"dateCreated": "2020-11-15 16:27:51.436"
+	  }
+	},
+	"updateStatus": {
+	  "data": {
+		"id": "90db40a2-7280-41e6-bbbe-9d55550759c8",
+		"firstName": "washa",
+		"lastName": "moto",
+		"emailAddress": "sukuma_email@email.com",
+		"account": {
+		  "id": "bea971c7-388f-4532-9069-c818d5ac2b41",
+		  "username": "sukuma",
+		  "status": "active"
+		},
+		"role": "guest",
+		"dateCreated": "2020-11-15 16:27:51.436"
+	  }
+	},
+	"updateRole": {
+	  "data": {
+		"id": "90db40a2-7280-41e6-bbbe-9d55550759c8",
+		"firstName": "washa",
+		"lastName": "moto",
+		"emailAddress": "sukuma_email@email.com",
+		"account": {
+		  "id": "bea971c7-388f-4532-9069-c818d5ac2b41",
+		  "username": "sukuma",
+		  "status": "active"
+		},
+		"role": "admin",
+		"dateCreated": "2020-11-15 16:27:51.436"
+	  }
+	},
+	"deletePlayer": {
+	  "data": 1
+	},
+	"createTeam": {
+	  "data": {
+		"id": "856a8aea-f35a-491f-bfb3-c5f855264ed3",
+		"name": "cassie_team_z",
+		"organization": "cassie banks",
+		"organizer": "6bf437e1-1b71-469c-8537-700665a279de",
+		"participants": null
+	  }
+	},
+	"updateTeam": {
+	  "data": {
+		"id": "856a8aea-f35a-491f-bfb3-c5f855264ed3",
+		"name": "cassie_team_zz",
+		"organization": "cassie chance",
+		"organizer": "6bf437e1-1b71-469c-8537-700665a279de"
+	  }
+	},
+	"addParticipant": {
+	  "data": {
+		"id": "856a8aea-f35a-491f-bfb3-c5f855264ed3",
+		"name": "cassie_team_zz",
+		"organization": "cassie chance",
+		"organizer": "6bf437e1-1b71-469c-8537-700665a279de",
+		"participants": [
+		  {
+			"id": "24c10c9c-5bac-402c-bf5d-dd2d1dbcb735",
+			"player": "6bf437e1-1b71-469c-8537-700665a279de",
+			"team": "856a8aea-f35a-491f-bfb3-c5f855264ed3"
+		  }
+		]
+	  }
+	},
+	"dropParticipant": {
+	  "data": {
+		"id": "856a8aea-f35a-491f-bfb3-c5f855264ed3",
+		"name": "cassie_team_zz",
+		"organization": "cassie chance",
+		"organizer": "6bf437e1-1b71-469c-8537-700665a279de",
+		"participants": []
+	  }
+	},
+	"clearParticipants": {
+	  "data": {
+		"id": "856a8aea-f35a-491f-bfb3-c5f855264ed3",
+		"name": "cassie_team_zz",
+		"organization": "cassie chance",
+		"organizer": "6bf437e1-1b71-469c-8537-700665a279de",
+		"participants": []
+	  }
+	},
+	"dropTeam": {
+	  "data": 1
+	},
+	"submitVote": {
+	  "data": {
+		"id": "fba3e41b-bd2c-4248-9c9f-9a805a6b6bb6",
+		"participant": "cf5c44ea-fea8-4507-981b-08308cd4c0ce",
+		"scrum": "cassie scrum",
+		"vote": 20
+	  }
+	}
+  }
+}

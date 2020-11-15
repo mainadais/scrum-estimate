@@ -1,0 +1,179 @@
+input AddAccount {
+    username: String!,
+    password: String!,
+    player: ID!
+}
+
+input AddParticipant {
+    player: ID!,
+    team: ID!
+}
+
+input CreatePlayer {
+    firstName: String,
+    lastName: String,
+    emailAddress: String!
+}
+
+input CreateTeam {
+    name: String!,
+    organization: String,
+    organizer: ID!
+}
+
+input CreateVote {
+    participant: ID!,
+    scrum: String!,
+    vote: Int!
+}
+
+input DropParticipant {
+    player: ID!,
+    team: ID!
+}
+
+input SubmitVote {
+    participant: ID!,
+    scrum: String!,
+    vote: Int!
+    voteId: ID!
+}
+
+input UpdatePassword {
+    password: String!,
+    player: ID!
+}
+
+input UpdatePlayer {
+    firstName: String!,
+    lastName: String!,
+    player: ID!
+}
+
+enum Role {player, admin, guest}
+
+input UpdateRole {
+    role: Role!,
+    player: ID!
+}
+
+enum Status {active, deactivated, pending_confirmation}
+
+input UpdateStatus {
+    status: Status!,
+    player: ID!
+}
+
+input UpdateTeam {
+    name: String!,
+    organization: String!,
+    team: ID!
+}
+
+type Account {
+    id: ID!,
+    username: String!,
+    password: String!,
+    status: Status!
+}
+
+type Participant {
+    id: ID!,
+    player: ID!,
+    team: ID!,
+}
+
+type Player {
+    id: ID!,
+    firstName: String,
+    lastName: String,
+    emailAddress: String!,
+    account: Account,
+    role: Role!,
+    dateCreated: String
+}
+
+type Team {
+    id: ID!,
+    name: String!,
+    organization: String,
+    organizer: ID!,
+    participants: [Participant],
+    dateCreated: String
+}
+
+type Vote {
+    id: ID!
+    participant: ID!,
+    scrum: String!,
+    vote: Int!
+}
+
+interface Result {
+    error: String
+}
+
+interface ListResult {
+    error: String
+}
+
+type IntResult implements Result {
+    data: Int
+    error: String
+}
+
+type PlayerResult implements Result {
+    data: Player
+    error: String
+}
+
+type PlayerListResult implements ListResult {
+    data: [Player]
+    error: String
+}
+
+type TeamResult implements Result{
+    data: Team
+    error: String
+}
+
+type VoteResult implements Result{
+    data: Vote
+    error: String
+}
+
+type VoteListResult implements ListResult{
+    data: [Vote]
+    error: String
+}
+
+type Query {
+    findById(playerId: ID!): PlayerResult
+    findByEmail( emailAddress: String): PlayerResult
+    findByUsername(username: String): PlayerResult
+    findPlayersByTeam(teamId: ID): PlayerListResult
+
+    findTeamById( teamId: ID): TeamResult
+    findByOrganizer(organizerId: ID!,  teamName: String!): TeamResult
+
+    getScrumVotes( scrum: String): VoteListResult
+}
+
+type Mutation {
+    addAccount(addAccount: AddAccount ): PlayerResult
+    updatePassword( updatePassword: UpdatePassword): PlayerResult
+    createPlayer( createPlayer: CreatePlayer): PlayerResult
+    updatePlayer(updatePlayer: UpdatePlayer ): PlayerResult
+    updateStatus(updateStatus: UpdateStatus ):PlayerResult
+    updateRole(updateRole: UpdateRole ):PlayerResult
+    deletePlayer(playerId: ID ): IntResult
+
+    createTeam( createTeam: CreateTeam!): TeamResult
+    updateTeam( updateTeam: UpdateTeam!): TeamResult
+    addParticipant( addParticipant: AddParticipant!): TeamResult
+    dropParticipant( dropParticipant: DropParticipant!): TeamResult
+    clearParticipants(teamId: ID!): TeamResult
+    dropTeam(teamId: ID!): IntResult
+
+    submitVote( submitVote: SubmitVote): VoteResult
+}

@@ -137,9 +137,9 @@ public class PlayerServiceImpl implements PlayerService {
     }
 
     @Override
-    public Result<Integer> deletePlayer(UUID teamId) {
+    public Result<Integer> deletePlayer(UUID playerId) {
         try {
-            playerRepository.deleteById(teamId);
+            playerRepository.deleteById(playerId);
             return new Some<>(1);
         } catch (Exception e) {
             return new None<>(e.getCause() != null ? e.getCause().getMessage() : e.getMessage());

@@ -1,0 +1,243 @@
+mutation createPlayer {
+    createPlayer(createPlayer: {
+        firstName: "sukuma",
+        lastName: "wiki",
+        emailAddress: "sukuma_email@email.com",
+    }){
+        data{
+            id
+            firstName
+            lastName
+            emailAddress
+            account{
+                id
+                username
+            }
+            role
+            dateCreated
+        }
+    }
+}
+
+mutation addAccount {
+    addAccount(addAccount: {
+        username: "sukuma",
+        password: "wiki_pass",
+        player:"90db40a2-7280-41e6-bbbe-9d55550759c8"
+    }){
+        data{
+            id
+            firstName
+            lastName
+            emailAddress
+            account{
+                id
+                username
+            }
+            role
+            dateCreated
+        }
+    }
+}
+
+mutation updatePassword {
+    updatePassword(updatePassword: {
+        password: "patapata"
+        player:"90db40a2-7280-41e6-bbbe-9d55550759c8"
+    }){
+        data{
+            id
+            firstName
+            lastName
+            emailAddress
+            account{
+                id
+                username
+                password
+            }
+            role
+            dateCreated
+        }
+    }
+}
+
+mutation updatePlayer {
+    updatePlayer(updatePlayer: {
+        firstName: "washa"
+        lastName: "moto"
+        player:"90db40a2-7280-41e6-bbbe-9d55550759c8"
+    }){
+        data{
+            id
+            firstName
+            lastName
+            emailAddress
+            account{
+                id
+                username
+                password
+            }
+            role
+            dateCreated
+        }
+    }
+}
+
+mutation updateStatus {
+    updateStatus(updateStatus: {
+        status:active
+        player:"90db40a2-7280-41e6-bbbe-9d55550759c8"
+    }){
+        data{
+            id
+            firstName
+            lastName
+            emailAddress
+            account{
+                id
+                username
+                status
+            }
+            role
+            dateCreated
+        }
+    }
+}
+
+mutation updateRole {
+    updateRole(updateRole: {
+        role: admin
+        player:"90db40a2-7280-41e6-bbbe-9d55550759c8"
+    }){
+        data{
+            id
+            firstName
+            lastName
+            emailAddress
+            account{
+                id
+                username
+                status
+            }
+            role
+            dateCreated
+        }
+    }
+}
+
+mutation deletePlayer {
+    deletePlayer(
+        playerId:"90db40a2-7280-41e6-bbbe-9d55550759c8"
+    ){
+        data
+    }
+}
+
+mutation createTeam {
+    createTeam(createTeam: {
+        name: "cassie_team_z",
+        organization: "cassie banks",
+        organizer: "6bf437e1-1b71-469c-8537-700665a279de",
+    }){
+        data{
+            id
+            name
+            organization
+            organizer
+        }
+    }
+}
+
+mutation updateTeam {
+    updateTeam(updateTeam: {
+        name: "cassie_team_zz",
+        organization: "cassie chance",
+        team: "3a97899d-c987-4c1b-a18a-6362239f162d"
+    }){
+        data{
+            id
+            name
+            organization
+            organizer
+        }
+    }
+}
+
+mutation addParticipant {
+    addParticipant(addParticipant: {
+        player: "6bf437e1-1b71-469c-8537-700665a279de"
+        team: "3a97899d-c987-4c1b-a18a-6362239f162d"
+    }){
+        data{
+            id
+            name
+            organization
+            organizer
+            participants{
+                id
+                player
+                team
+            }
+        }
+    }
+}
+
+mutation dropParticipant {
+    dropParticipant(dropParticipant: {
+        player: "6bf437e1-1b71-469c-8537-700665a279de"
+        team: "856a8aea-f35a-491f-bfb3-c5f855264ed3"
+    }){
+        data{
+            id
+            name
+            organization
+            organizer
+            participants{
+                id
+                player
+                team
+            }
+        }
+    }
+}
+
+mutation clearParticipants {
+    clearParticipants(teamId: "856a8aea-f35a-491f-bfb3-c5f855264ed3"
+    ){
+        data{
+            id
+            name
+            organization
+            organizer
+            participants{
+                id
+                player
+                team
+            }
+        }
+    }
+}
+
+mutation dropTeam {
+    dropTeam(teamId: "856a8aea-f35a-491f-bfb3-c5f855264ed3"
+    ){
+        data
+    }
+}
+
+mutation submitVote {
+    submitVote(submitVote: {
+        participant: "cf5c44ea-fea8-4507-981b-08308cd4c0ce",
+        scrum: "cassie scrum",
+        vote: 20,
+        voteId: "fba3e41b-bd2c-4248-9c9f-9a805a6b6bb6"
+    }
+    ){
+        data{
+            id
+            participant
+            scrum
+            vote
+        }
+    }
+}

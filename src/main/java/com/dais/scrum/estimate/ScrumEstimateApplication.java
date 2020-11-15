@@ -9,5 +9,4 @@ public class ScrumEstimateApplication {
     public static void main(String[] args) {
         SpringApplication.run(ScrumEstimateApplication.class, args);
     }
-
 }
