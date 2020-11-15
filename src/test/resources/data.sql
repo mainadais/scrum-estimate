@@ -1,33 +1,33 @@
---create accounts
-insert into tbl_account (id, username, password)
-values (uuid_generate_v4(), 'steve', 'steve_password')
+--create players
+insert into tbl_player (id, first_name, last_name, email_address, date_created)
+values (uuid_generate_v4(), 'cassie_first', 'cassie_last', 'cassie_email@email.com', current_timestamp)
 on conflict do nothing;
-insert into tbl_account (id, username, password)
-values (uuid_generate_v4(), 'melissa', 'melissa_password')
+insert into tbl_player (id, first_name, last_name, email_address, date_created)
+values (uuid_generate_v4(), 'jacob_first', 'jacob_last', 'jacob_email@email.com', current_timestamp)
 on conflict do nothing;
-insert into tbl_account (id, username, password)
-values (uuid_generate_v4(), 'jacob', 'jacob_password')
+insert into tbl_player (id, first_name, last_name, email_address, date_created)
+values (uuid_generate_v4(), 'melissa_first', 'melissa_last', 'melissa_email@email.com', current_timestamp)
 on conflict do nothing;
-insert into tbl_account (id, username, password)
-values (uuid_generate_v4(), 'cassie', 'cassie_password')
+insert into tbl_player (id, first_name, last_name, email_address, date_created)
+values (uuid_generate_v4(), 'steve_first', 'steve_last', 'steve_email@email.com', current_timestamp)
 on conflict do nothing;
 
---create players
-insert into tbl_player (id, first_name, last_name, email_address, account, date_created)
-values (uuid_generate_v4(), 'cassie_first', 'cassie_last', 'cassie_email@email.com',
-        (select id from tbl_account where username = 'cassie'), current_timestamp)
+--create accounts
+insert into tbl_account (id, username, password, player)
+values (uuid_generate_v4(), 'steve', 'steve_password',
+        (select id from tbl_player where email_address = 'steve_email@email.com'))
 on conflict do nothing;
-insert into tbl_player (id, first_name, last_name, email_address, account, date_created)
-values (uuid_generate_v4(), 'jacob_first', 'jacob_last', 'jacob_email@email.com',
-        (select id from tbl_account where username = 'jacob'), current_timestamp)
+insert into tbl_account (id, username, password, player)
+values (uuid_generate_v4(), 'melissa', 'melissa_password',
+        (select id from tbl_player where email_address = 'melissa_email@email.com'))
 on conflict do nothing;
-insert into tbl_player (id, first_name, last_name, email_address, account, date_created)
-values (uuid_generate_v4(), 'melissa_first', 'melissa_last', 'melissa_email@email.com',
-        (select id from tbl_account where username = 'melissa'), current_timestamp)
+insert into tbl_account (id, username, password, player)
+values (uuid_generate_v4(), 'jacob', 'jacob_password',
+        (select id from tbl_player where email_address = 'jacob_email@email.com'))
 on conflict do nothing;
-insert into tbl_player (id, first_name, last_name, email_address, account, date_created)
-values (uuid_generate_v4(), 'steve_first', 'steve_last', 'steve_email@email.com',
-        (select id from tbl_account where username = 'steve'), current_timestamp)
+insert into tbl_account (id, username, password, player)
+values (uuid_generate_v4(), 'cassie', 'cassie_password',
+        (select id from tbl_player where email_address = 'cassie_email@email.com'))
 on conflict do nothing;
 
 --create teams
