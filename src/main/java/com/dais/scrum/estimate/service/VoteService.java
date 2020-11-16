@@ -11,4 +11,6 @@ public interface VoteService {
     Result<Vote> submitVote(SubmitVote submitVote);
 
     Result<List<Vote>> getScrumVotes(String scrum);
+
+    Boolean publishVotes(String scrum);
 }

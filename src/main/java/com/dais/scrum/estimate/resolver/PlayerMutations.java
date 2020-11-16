@@ -9,7 +9,7 @@ import java.util.UUID;
 public interface PlayerMutations {
 
     PlayerService getPlayerService();
-    
+
     default Result<Player> addAccount(AddAccount addAccount) {
         return getPlayerService().addAccount(addAccount);
     }

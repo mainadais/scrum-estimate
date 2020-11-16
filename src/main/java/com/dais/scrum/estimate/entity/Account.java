@@ -17,5 +17,6 @@ public class Account {
     private String username;
     private String password;
     private Status status;
+
     public enum Status {active, deactivated, pending_confirmation}
 }

@@ -12,4 +12,6 @@ public interface VoteMutations {
     default Result<Vote> submitVote(SubmitVote submitVote) {
         return getVoteService().submitVote(submitVote);
     }
+
+    default void publishVotes(String scrum){ getVoteService().publishVotes(scrum);}
 }

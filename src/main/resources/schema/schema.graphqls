@@ -176,4 +176,9 @@ type Mutation {
     dropTeam(teamId: ID!): IntResult
 
     submitVote( submitVote: SubmitVote): VoteResult
+    publishVotes( scrum: String): Boolean
+}
+
+type Subscription {
+    voting: VoteListResult
 }
