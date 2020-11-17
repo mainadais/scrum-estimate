@@ -40,7 +40,8 @@ input SubmitVote {
 }
 
 input UpdatePassword {
-    password: String!,
+    oldPassword: String!
+    newPassword: String!,
     player: ID!
 }
 
@@ -50,14 +51,14 @@ input UpdatePlayer {
     player: ID!
 }
 
-enum Role {player, admin, guest}
+enum Role {PLAYER, ADMIN, USER, GUEST}
 
 input UpdateRole {
     role: Role!,
     player: ID!
 }
 
-enum Status {active, deactivated, pending_confirmation}
+enum Status {active, disabled, pending_confirmation, expired, locked}
 
 input UpdateStatus {
     status: Status!,
@@ -147,6 +148,13 @@ type VoteListResult implements ListResult{
     error: String
 }
 
+type JwtUserDetails {
+    username: String!
+    role: Role!
+    status: Status!
+    token: String!
+}
+
 type Query {
     findById(playerId: ID!): PlayerResult
     findByEmail( emailAddress: String): PlayerResult
@@ -160,6 +168,8 @@ type Query {
 }
 
 type Mutation {
+    login(email: String!, password: String!): JwtUserDetails
+
     addAccount(addAccount: AddAccount ): PlayerResult
     updatePassword( updatePassword: UpdatePassword): PlayerResult
     createPlayer( createPlayer: CreatePlayer): PlayerResult

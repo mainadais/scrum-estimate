@@ -1,5 +1,6 @@
 package com.dais.scrum.estimate.repository;
 
+import com.dais.scrum.estimate.entity.Account;
 import com.dais.scrum.estimate.entity.Player;
 import org.springframework.data.jdbc.repository.query.Query;
 import org.springframework.data.repository.CrudRepository;
@@ -18,6 +19,9 @@ public interface PlayerRepository extends CrudRepository<Player, UUID> {
     @Query("select * from tbl_player pl where pl.email_address = :email")
     Player findPlayerByEmail(@Param("email") String emailAddress);
 
-    @Query("select * from tbl_player pl inner join tbl_account acc on acc.player = pl.id where acc.username = :username")
+    @Query("select * from tbl_player pl left outer join tbl_account acc on acc.player = pl.id where acc.username = :username")
     Player findPlayerByUsername(@Param("username") String username);
+
+    @Query("select * from tbl_account acc where acc.player = :playerId")
+    Account findPlayerAccount(@Param("playerId") UUID playerId);
 }

@@ -242,3 +242,13 @@ mutation submitVote {
     }
 }
 
+mutation login($emailAddress: String!, $password: String!){
+    login(email: $emailAddress, password: $password){
+        id
+        firstName
+        lastName
+        account {
+            username
+        }
+    }
+}

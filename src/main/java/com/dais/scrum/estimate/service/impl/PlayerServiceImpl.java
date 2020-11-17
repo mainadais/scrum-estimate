@@ -1,10 +1,12 @@
 package com.dais.scrum.estimate.service.impl;
 
 import com.dais.scrum.estimate.domain.*;
+import com.dais.scrum.estimate.entity.Account;
 import com.dais.scrum.estimate.entity.Player;
 import com.dais.scrum.estimate.repository.PlayerRepository;
 import com.dais.scrum.estimate.service.PlayerService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -16,6 +18,7 @@ import java.util.UUID;
 public class PlayerServiceImpl implements PlayerService {
 
     final PlayerRepository playerRepository;
+    final PasswordEncoder passwordEncoder;
 
     @Override
     public Result<Player> findById(UUID playerId) {
@@ -33,7 +36,10 @@ public class PlayerServiceImpl implements PlayerService {
     @Override
     public Result<Player> findByEmail(String emailAddress) {
         try {
-            return new Some<>(playerRepository.findPlayerByEmail(emailAddress));
+            Player player = playerRepository.findPlayerByEmail(emailAddress);
+            Account account = playerRepository.findPlayerAccount(player.getId());
+            player.setAccount(account);
+            return new Some<>(player);
         } catch (Exception e) {
             return new None<>(e.getCause() != null ? e.getCause().getMessage() : e.getMessage());
         }
@@ -42,7 +48,10 @@ public class PlayerServiceImpl implements PlayerService {
     @Override
     public Result<Player> findByUsername(String username) {
         try {
-            return new Some<>(playerRepository.findPlayerByUsername(username));
+            Player player = playerRepository.findPlayerByUsername(username);
+            Account account = playerRepository.findPlayerAccount(player.getId());
+            player.setAccount(account);
+            return new Some<>(player);
         } catch (Exception e) {
             return new None<>(e.getCause() != null ? e.getCause().getMessage() : e.getMessage());
         }
@@ -51,6 +60,7 @@ public class PlayerServiceImpl implements PlayerService {
     @Override
     public Result<Player> addAccount(AddAccount addAccount) {
         try {
+            addAccount.setPassword(passwordEncoder.encode(addAccount.getPassword()));
             Result<Player> find = findById(addAccount.getPlayer());
             if (find.getData() != null) {
                 Player player = addAccount.apply(find.getData());

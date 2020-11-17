@@ -1,6 +1,7 @@
 package com.dais.scrum.estimate.repository;
 
 import com.dais.scrum.estimate.entity.Vote;
+import graphql.kickstart.spring.web.boot.GraphQLWebsocketAutoConfiguration;
 import org.hamcrest.core.Is;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,7 +17,7 @@ import static org.hamcrest.MatcherAssert.assertThat;
 
 @SpringBootTest
 @ActiveProfiles("test")
-@EnableAutoConfiguration(exclude = {WebMvcAutoConfiguration.class})
+@EnableAutoConfiguration(exclude = {WebMvcAutoConfiguration.class, GraphQLWebsocketAutoConfiguration.class})
 public class VoteRepositoryTest {
 
     @Autowired

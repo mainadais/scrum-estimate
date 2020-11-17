@@ -6,6 +6,7 @@ import com.dais.scrum.estimate.entity.Player;
 import com.dais.scrum.estimate.entity.Team;
 import com.dais.scrum.estimate.service.PlayerService;
 import com.dais.scrum.estimate.service.TeamService;
+import graphql.kickstart.spring.web.boot.GraphQLWebsocketAutoConfiguration;
 import org.hamcrest.core.Is;
 import org.hamcrest.core.IsNull;
 import org.junit.jupiter.api.Disabled;
@@ -14,6 +15,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.autoconfigure.web.servlet.WebMvcAutoConfiguration;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.test.context.ActiveProfiles;
 
 import java.util.Date;
@@ -23,13 +25,15 @@ import static org.hamcrest.MatcherAssert.assertThat;
 
 @SpringBootTest
 @ActiveProfiles("test")
-@EnableAutoConfiguration(exclude = {WebMvcAutoConfiguration.class})
+@EnableAutoConfiguration(exclude = {WebMvcAutoConfiguration.class, GraphQLWebsocketAutoConfiguration.class})
 public class PlayerServiceImplTest {
 
     @Autowired
     PlayerService playerService;
     @Autowired
     TeamService teamService;
+    @Autowired
+    PasswordEncoder passwordEncoder;
 
     @Test
     void findByIdOrEmailOrUsername() {
@@ -60,7 +64,7 @@ public class PlayerServiceImplTest {
         //create account for new player
         AddAccount addAccount = new AddAccount();
         addAccount.setUsername("player_username");
-        addAccount.setPassword("player_password");
+        addAccount.setPassword(passwordEncoder.encode("player_password"));
         addAccount.setPlayer(newPlayer.getData().getId());
 
         //update account info for new player
@@ -74,9 +78,10 @@ public class PlayerServiceImplTest {
         Result<Player> player = playerService.findByUsername("cassie");
         assertThat(player.getData(), IsNull.notNullValue());
 
-        String newPassword = "abc_xyz";
+        String newPassword = passwordEncoder.encode("abc_xyz");
         UpdatePassword updatePassword = new UpdatePassword();
-        updatePassword.setPassword(newPassword);
+        updatePassword.setOldPassword(player.getData().getAccount().getPassword());
+        updatePassword.setNewPassword(newPassword);
         updatePassword.setPlayer(player.getData().getId());
         Result<Player> updatedPlayer = playerService.updatePassword(updatePassword);
         assertThat(updatedPlayer.getData().getAccount().getPassword(), Is.is(newPassword));
@@ -114,7 +119,7 @@ public class PlayerServiceImplTest {
 
         UpdateRole updateRole = new UpdateRole();
         updateRole.setPlayer(player.getData().getId());
-        updateRole.setRole(Player.Role.admin);
+        updateRole.setRole(Player.Role.ADMIN);
 
         Result<Player> updatedRole = playerService.updateRole(updateRole);
         assertThat(updatedRole.getData().getRole(), Is.is(updateRole.getRole()));

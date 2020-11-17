@@ -20,7 +20,7 @@ public class CreatePlayer implements Supplier<Player> {
                 .firstName(getFirstName())
                 .lastName(getLastName())
                 .emailAddress(getEmailAddress())
-                .role(Player.Role.guest)
+                .role(Player.Role.GUEST)
                 .dateCreated(new Date())
                 .build();
     }

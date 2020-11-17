@@ -22,5 +22,5 @@ public class Player {
     private Role role;
     private Date dateCreated;
 
-    public enum Role {player, admin, guest}
+    public enum Role {PLAYER, ADMIN, USER, GUEST}
 }

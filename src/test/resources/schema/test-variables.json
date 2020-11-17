@@ -102,25 +102,25 @@
 		"id": "a1a82f0a-0f27-4e90-8fbb-2490386045ab",
 		"firstName": "jacob_first",
 		"lastName": "jacob_last",
-		"role": "guest"
+		"role": "GUEST"
 	  },
 	  {
 		"id": "427ffa4a-ff64-4031-b4dd-a647de93ce48",
 		"firstName": "melissa_first",
 		"lastName": "melissa_last",
-		"role": "guest"
+		"role": "GUEST"
 	  },
 	  {
 		"id": "cf5c44ea-fea8-4507-981b-08308cd4c0ce",
 		"firstName": "steve_first",
 		"lastName": "steve_last",
-		"role": "guest"
+		"role": "GUEST"
 	  },
 	  {
 		"id": "036a909f-1d47-4ff6-b4bf-5b42addca334",
 		"firstName": "jennie",
 		"lastName": "bean",
-		"role": "admin"
+		"role": "ADMIN"
 	  }
 	],
 	"error": null
@@ -193,7 +193,7 @@
 		"lastName": "wiki",
 		"emailAddress": "sukuma_email@email.com",
 		"account": null,
-		"role": "guest",
+		"role": "GUEST",
 		"dateCreated": "Sun Nov 15 16:27:51 CST 2020"
 	  }
 	},
@@ -207,7 +207,7 @@
 		  "id": "bea971c7-388f-4532-9069-c818d5ac2b41",
 		  "username": "sukuma"
 		},
-		"role": "guest",
+		"role": "GUEST",
 		"dateCreated": "2020-11-15 16:27:51.436"
 	  }
 	},
@@ -222,7 +222,7 @@
 		  "username": "sukuma",
 		  "password": "patapata"
 		},
-		"role": "guest",
+		"role": "GUEST",
 		"dateCreated": "2020-11-15 16:27:51.436"
 	  }
 	},
@@ -237,7 +237,7 @@
 		  "username": "sukuma",
 		  "password": "patapata"
 		},
-		"role": "guest",
+		"role": "GUEST",
 		"dateCreated": "2020-11-15 16:27:51.436"
 	  }
 	},
@@ -252,7 +252,7 @@
 		  "username": "sukuma",
 		  "status": "active"
 		},
-		"role": "guest",
+		"role": "GUEST",
 		"dateCreated": "2020-11-15 16:27:51.436"
 	  }
 	},
@@ -267,7 +267,7 @@
 		  "username": "sukuma",
 		  "status": "active"
 		},
-		"role": "admin",
+		"role": "ADMIN",
 		"dateCreated": "2020-11-15 16:27:51.436"
 	  }
 	},
@@ -333,6 +333,25 @@
 		"participant": "cf5c44ea-fea8-4507-981b-08308cd4c0ce",
 		"scrum": "cassie scrum",
 		"vote": 20
+	  }
+	},
+	"login": {
+	  "id": "def95007-d223-4a7c-8473-9617b9183cdb",
+	  "firstName": "jennie",
+	  "lastName": "bean",
+	  "account": {
+		"username": "cassie"
+	  }
+	}
+  },
+  "secured": {
+	"unauthorized": {
+	  "findByEmail": {
+		"timestamp": "2020-11-17T01:19:24.518+00:00",
+		"status": 403,
+		"error": "Forbidden",
+		"message": "Forbidden",
+		"path": "/graphql"
 	  }
 	}
   }

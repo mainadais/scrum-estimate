@@ -14,19 +14,19 @@ on conflict do nothing;
 
 --create accounts
 insert into tbl_account (id, username, password, player)
-values (uuid_generate_v4(), 'steve', 'steve_password',
+values (uuid_generate_v4(), 'steve', '$2a$10$s2FxLYuOcM7hK7yZjtdmxu2lkyFbFc7qVr.TZ9pypWkucKmjx2KQa',
         (select id from tbl_player where email_address = 'steve_email@email.com'))
 on conflict do nothing;
 insert into tbl_account (id, username, password, player)
-values (uuid_generate_v4(), 'melissa', 'melissa_password',
+values (uuid_generate_v4(), 'melissa', '$2a$10$s2FxLYuOcM7hK7yZjtdmxu2lkyFbFc7qVr.TZ9pypWkucKmjx2KQa',
         (select id from tbl_player where email_address = 'melissa_email@email.com'))
 on conflict do nothing;
 insert into tbl_account (id, username, password, player)
-values (uuid_generate_v4(), 'jacob', 'jacob_password',
+values (uuid_generate_v4(), 'jacob', '$2a$10$s2FxLYuOcM7hK7yZjtdmxu2lkyFbFc7qVr.TZ9pypWkucKmjx2KQa',
         (select id from tbl_player where email_address = 'jacob_email@email.com'))
 on conflict do nothing;
 insert into tbl_account (id, username, password, player)
-values (uuid_generate_v4(), 'cassie', 'cassie_password',
+values (uuid_generate_v4(), 'cassie', '$2a$10$s2FxLYuOcM7hK7yZjtdmxu2lkyFbFc7qVr.TZ9pypWkucKmjx2KQa',
         (select id from tbl_player where email_address = 'cassie_email@email.com'))
 on conflict do nothing;
 

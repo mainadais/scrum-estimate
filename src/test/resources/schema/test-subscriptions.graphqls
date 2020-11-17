@@ -1,0 +1,7 @@
+subscription voting{
+    voting{
+        data{
+            vote
+        }
+    }
+}

@@ -1,5 +1,6 @@
 package com.dais.scrum.estimate.resolver;
 
+import com.dais.scrum.estimate.security.JwtUserDetailsService;
 import com.dais.scrum.estimate.service.PlayerService;
 import com.dais.scrum.estimate.service.TeamService;
 import com.dais.scrum.estimate.service.VoteService;
@@ -14,6 +15,7 @@ public class QueryResolver implements GraphQLQueryResolver, TeamQueries, PlayerQ
     final PlayerService playerService;
     final TeamService teamService;
     final VoteService voteService;
+    final JwtUserDetailsService jwtUserDetailsService;
 
     @Override
     public TeamService getTeamService() {

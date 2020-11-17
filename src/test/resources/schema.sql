@@ -14,7 +14,7 @@ CREATE TABLE tbl_player
     first_name    varchar(32)  NOT NULL,
     last_name     varchar(32)  not null,
     email_address varchar(128) not null,
-    role          varchar(32) default 'guest',
+    role          varchar(32) default 'GUEST',
     date_created  timestamp   default current_timestamp,
     CONSTRAINT uniq_email unique (email_address),
     CONSTRAINT tbl_player_pk PRIMARY KEY (id)
