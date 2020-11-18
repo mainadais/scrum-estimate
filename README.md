@@ -1,35 +1,24 @@
-### Define entities
+## Stepping through the project changes
 
-- Vote
-- Scrum
-- Team
-- Player
-- Account
-
-### Create database
-``` 
-    psql -U postgres
-    Password for user postgres:
-    psql (13.0, server 12.3)
-    Type "help" for help.
-
-    postgres=# create database db_scrum_estimate
-    postgres-# \l
-    \q
+Check out the individual branches to view the changes made through each step
+```
+master                    
+modelling-entity-classes  
+modelling-service-classes 
+adding-graphql-frontend   
+adding-subscription       
+working-with-a-client     
 ```
 
-### Add connection properties
+### Getting started
+- To get the database built and pre-populated with initial data, simply run
 ```
-see /src/main/resources/application-local.properties
+./gradlew clean build
 ```
+- Start the application so that the server is ready for client requests
 
-### Define database schema
+- When you run the application you can obtain a token for using the sample plain clients
 ```
-see src/main/resources/schema.sql
+com.dais.scrum.estimate.client.ScrumEstimateClientApp
 ```
-
-### Insert test data
-```
-see src/test/resources/data.sql
-```
-
+- You can now merrily use the token with the any other client

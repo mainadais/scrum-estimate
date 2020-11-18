@@ -168,7 +168,7 @@ type Query {
 }
 
 type Mutation {
-    login(email: String!, password: String!): JwtUserDetails
+    login(emailAddress: String!, password: String!): JwtUserDetails
 
     addAccount(addAccount: AddAccount ): PlayerResult
     updatePassword( updatePassword: UpdatePassword): PlayerResult

@@ -16,6 +16,15 @@ configurations {
 
 repositories {
     mavenCentral()
+    jcenter()
+    maven {
+        url "${artifactory_contextUrl}/gradle-release-local"
+        credentials {
+            username = "${artifactory_user}"
+            password = "${artifactory_password}"
+        }
+    }
+    mavenLocal()
 }
 
 dependencies {
@@ -24,7 +33,9 @@ dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-security'
     implementation group: 'com.graphql-java-kickstart', name: 'graphql-spring-boot-starter', version: '8.0.0'
     implementation group: 'io.reactivex.rxjava2', name: 'rxjava', version: '2.2.19'
-    compile group: 'com.auth0', name: 'java-jwt', version: '3.11.0'
+    implementation group: 'com.auth0', name: 'java-jwt', version: '3.11.0'
+
+    implementation group: 'com.dais', name: 'graphql-client-api', version: '0.0.19'
 
     compileOnly 'org.projectlombok:lombok'
     developmentOnly 'org.springframework.boot:spring-boot-devtools'
