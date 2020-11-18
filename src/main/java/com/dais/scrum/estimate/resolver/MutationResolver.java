@@ -42,13 +42,13 @@ public class MutationResolver implements GraphQLMutationResolver, TeamMutations,
     }
 
     @PreAuthorize("isAnonymous()")
-    public JwtUserDetails login(String email, String password) {
-        UsernamePasswordAuthenticationToken credentials = new UsernamePasswordAuthenticationToken(email, password);
+    public JwtUserDetails login(String emailAddress, String password) {
+        UsernamePasswordAuthenticationToken credentials = new UsernamePasswordAuthenticationToken(emailAddress, password);
         try {
             SecurityContextHolder.getContext().setAuthentication(authenticationProvider.authenticate(credentials));
             return ((JwtUserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal());
         } catch (AuthenticationException ex) {
-            throw new BadCredentialsException(email);
+            throw new BadCredentialsException(emailAddress);
         }
     }
 }

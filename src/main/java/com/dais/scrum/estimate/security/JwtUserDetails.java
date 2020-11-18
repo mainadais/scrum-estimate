@@ -2,9 +2,7 @@ package com.dais.scrum.estimate.security;
 
 import com.dais.scrum.estimate.entity.Account;
 import com.dais.scrum.estimate.entity.Player;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.RequiredArgsConstructor;
+import lombok.*;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -14,14 +12,16 @@ import java.util.Collections;
 
 @Getter
 @Builder
-@RequiredArgsConstructor
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
 public class JwtUserDetails implements UserDetails {
 
-    final String username;
-    final String password;
-    final Account.Status status;
-    final Player.Role role;
-    final String token;
+    private String username;
+    private String password;
+    private Account.Status status;
+    private Player.Role role;
+    private String token;
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
