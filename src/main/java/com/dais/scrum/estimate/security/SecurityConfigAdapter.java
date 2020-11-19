@@ -47,7 +47,7 @@ public class SecurityConfigAdapter extends WebSecurityConfigurerAdapter {
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
         CorsConfiguration config = new CorsConfiguration();
         config.setAllowCredentials(true);
-        config.setAllowedOrigins(List.of("electron://altair"));
+        config.setAllowedOrigins(List.of("electron://altair", "http://localhost:3000"));
         config.setAllowedHeaders(List.of("*"));
         config.setAllowedMethods(List.of("*"));
         source.registerCorsConfiguration("/**", config);

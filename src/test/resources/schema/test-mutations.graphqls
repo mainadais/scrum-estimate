@@ -1,9 +1,5 @@
-mutation createPlayer {
-    createPlayer(createPlayer: {
-        firstName: "sukuma",
-        lastName: "wiki",
-        emailAddress: "sukuma_email@email.com",
-    }){
+mutation createPlayer($createPlayer: CreatePlayer) {
+    createPlayer(createPlayer: $createPlayer){
         data{
             id
             firstName
@@ -19,12 +15,8 @@ mutation createPlayer {
     }
 }
 
-mutation addAccount {
-    addAccount(addAccount: {
-        username: "sukuma",
-        password: "wiki_pass",
-        player:"90db40a2-7280-41e6-bbbe-9d55550759c8"
-    }){
+mutation addAccount($addAccount: AddAccount) {
+    addAccount(addAccount: $addAccount){
         data{
             id
             firstName
@@ -42,7 +34,8 @@ mutation addAccount {
 
 mutation updatePassword {
     updatePassword(updatePassword: {
-        password: "patapata"
+        newPassword: "password"
+        oldPassword: "patapata"
         player:"90db40a2-7280-41e6-bbbe-9d55550759c8"
     }){
         data{
@@ -106,7 +99,7 @@ mutation updateStatus {
 
 mutation updateRole {
     updateRole(updateRole: {
-        role: admin
+        role: ADMIN
         player:"90db40a2-7280-41e6-bbbe-9d55550759c8"
     }){
         data{
@@ -243,12 +236,10 @@ mutation submitVote {
 }
 
 mutation login($emailAddress: String!, $password: String!){
-    login(email: $emailAddress, password: $password){
-        id
-        firstName
-        lastName
-        account {
-            username
-        }
+    login(emailAddress: $emailAddress, password: $password){
+        username
+        status
+        role
+        token
     }
 }

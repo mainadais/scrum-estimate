@@ -11,7 +11,7 @@ public interface PlayerMutations {
 
     PlayerService getPlayerService();
 
-    @PreAuthorize("hasAuthority('ADMIN')")
+    @PreAuthorize("isAnonymous()")
     default Result<Player> addAccount(AddAccount addAccount) {
         return getPlayerService().addAccount(addAccount);
     }
@@ -21,7 +21,7 @@ public interface PlayerMutations {
         return getPlayerService().updatePassword(updatePassword);
     }
 
-    @PreAuthorize("hasAuthority('ADMIN')")
+    @PreAuthorize("isAnonymous()")
     default Result<Player> createPlayer(CreatePlayer createPlayer) {
         return getPlayerService().createPlayer(createPlayer);
     }

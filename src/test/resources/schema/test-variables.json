@@ -21,6 +21,20 @@
 	},
 	"getScrumVotes": {
 	  "scrum": "cassie scrum"
+	},
+	"createPlayer": {
+	  "createPlayer":{
+		"emailAddress": "kijana_email@email.com",
+		"firstName": "Kijana",
+		"lastName": "mzee"
+	  }
+	},
+	"addAccount":{
+	  "addAccount":{
+		"username": "kijana",
+		"password": "kijana_pass",
+		"player":"9bf67225-08d8-4b84-b801-10c2a63c08ed"
+	  }
 	}
   },
   "queryResults": {
