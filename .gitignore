@@ -35,3 +35,26 @@ out/
 
 ### VS Code ###
 .vscode/
+
+## webui
+# dependencies
+webui/node_modules
+webui/.pnp
+webui/.pnp.js
+
+# testing
+webui/coverage
+
+# production
+webui/build
+
+# misc
+webui/.DS_Store
+webui/.env.local
+webui/.env.development.local
+webui/.env.test.local
+webui/.env.production.local
+
+webui/npm-debug.log*
+webui/yarn-debug.log*
+webui/yarn-error.log*
