@@ -59,7 +59,7 @@ public class PlayerRepositoryTest {
     @Test
     public void testFindPlayersByTeam() {
         Player organizer = playerRepository.findPlayerByEmail("cassie_email@email.com");
-        Team cassieTeam = teamRepository.findByOrganizer(organizer.getId(), "cassie_team_1");
+        Team cassieTeam = teamRepository.findTeamByName(organizer.getId(), "cassie_team_1");
         List<Player> players = playerRepository.findPlayersByTeam(cassieTeam.getId());
         assertThat(players.size(), Is.is(4));
     }

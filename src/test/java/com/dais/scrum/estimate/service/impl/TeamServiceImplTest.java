@@ -33,7 +33,7 @@ class TeamServiceImplTest {
     @Test
     void findById() {
         Result<Player> player = playerService.findByEmail("cassie_email@email.com");
-        Result<Team> team = teamService.findByOrganizer(player.getData().getId(), "cassie_team_1");
+        Result<Team> team = teamService.findTeamByName(player.getData().getId(), "cassie_team_1");
         assertThat(team.getData(), IsNull.notNullValue());
         assertThat(team.getData().getName(), Is.is("cassie_team_1"));
     }
@@ -43,7 +43,7 @@ class TeamServiceImplTest {
         Result<Player> player = playerService.findByEmail("cassie_email@email.com");
         CreateTeam newTeam = new CreateTeam();
         newTeam.setDateCreated(new Date());
-        newTeam.setOrganization("cassie software");
+        newTeam.setChoices(new String[]{"1", "2", "3", "5", "8", "13", "21"});
         newTeam.setName("morning blitz");
         newTeam.setOrganizer(player.getData().getId());
 
@@ -54,18 +54,18 @@ class TeamServiceImplTest {
         //update team
         UpdateTeam updateTeam = new UpdateTeam();
         updateTeam.setName("afternoon waltz");
-        updateTeam.setOrganization("cassie software inc");
+        updateTeam.setChoices(new String[]{"1", "2", "3", "5", "8", "13", "21"});
         updateTeam.setTeam(team.getData().getId());
 
         Result<Team> updatedTeam = teamService.updateTeam(updateTeam);
         assertThat(updatedTeam.getData().getName(), Is.is(updateTeam.getName()));
-        assertThat(updatedTeam.getData().getOrganization(), Is.is(updateTeam.getOrganization()));
+        assertThat(updatedTeam.getData().getChoices(), Is.is(updateTeam.getChoices()));
     }
 
     @Test
     void addDropAndClearParticipants() {
         Result<Player> player = playerService.findByEmail("steve_email@email.com");
-        Result<Team> team = teamService.findByOrganizer(player.getData().getId(), "steve_team_1");
+        Result<Team> team = teamService.findTeamByName(player.getData().getId(), "steve_team_1");
         Result<List<Player>> teamPlayers = playerService.findPlayersByTeam(team.getData().getId());
         assertThat(teamPlayers.getData().size(), Is.is(0));
 
@@ -97,7 +97,7 @@ class TeamServiceImplTest {
     @Test
     void dropTeam() {
         Result<Player> player = playerService.findByEmail("melissa_email@email.com");
-        Result<Team> team = teamService.findByOrganizer(player.getData().getId(), "melissa_team_1");
+        Result<Team> team = teamService.findTeamByName(player.getData().getId(), "melissa_team_1");
         Result<Integer> dropped = teamService.dropTeam(team.getData().getId());
         assertThat(dropped.getData(), Is.is(1));
     }

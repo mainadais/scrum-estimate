@@ -1,5 +1,6 @@
 package com.dais.scrum.estimate.repository;
 
+import com.dais.scrum.estimate.entity.Player;
 import com.dais.scrum.estimate.entity.Team;
 import graphql.kickstart.spring.web.boot.GraphQLWebsocketAutoConfiguration;
 import org.hamcrest.core.Is;
@@ -22,11 +23,27 @@ public class TeamRepositoryTest {
 
     @Autowired
     TeamRepository teamRepository;
+    @Autowired
+    PlayerRepository playerRepository;
 
     @Test
     public void testFindAllTeams() {
         List<Team> teams = new ArrayList<>();
         teamRepository.findAll().forEach(teams::add);
         assertThat(teams.size(), Is.is(8));
+    }
+
+    @Test
+    public void testFindTeamsByOrganizer() {
+        Player player = playerRepository.findPlayerByEmail("cassie_email@email.com");
+        List<Team> teams = teamRepository.findTeamsByOrganizer(player.getId());
+        assertThat(teams.size(), Is.is(2));
+    }
+
+    @Test
+    public void testFindTeamsJoined() {
+        Player player = playerRepository.findPlayerByEmail("cassie_email@email.com");
+        List<Team> joined = teamRepository.findTeamsJoined(player.getId());
+        assertThat(joined.size(), Is.is(1));
     }
 }

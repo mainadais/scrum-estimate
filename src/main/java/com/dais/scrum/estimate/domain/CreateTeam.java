@@ -11,16 +11,16 @@ import java.util.function.Supplier;
 public class CreateTeam implements Supplier<Team> {
 
     private String name;
-    private String organization;
     private UUID organizer;
+    private String[] choices;
     private Date dateCreated;
 
     @Override
     public Team get() {
         return Team.builder()
                 .name(getName())
-                .organization(getOrganization())
                 .organizer(getOrganizer())
+                .choices(getChoices())
                 .dateCreated(new Date())
                 .build();
     }

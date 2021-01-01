@@ -17,14 +17,8 @@ input CreatePlayer {
 
 input CreateTeam {
     name: String!,
-    organization: String,
+    choices: [String],
     organizer: ID!
-}
-
-input CreateVote {
-    participant: ID!,
-    scrum: String!,
-    vote: Int!
 }
 
 input DropParticipant {
@@ -34,9 +28,8 @@ input DropParticipant {
 
 input SubmitVote {
     participant: ID!,
-    scrum: String!,
-    vote: Int!
-    voteId: ID!
+    team: ID!,
+    vote: String!
 }
 
 input UpdatePassword {
@@ -49,6 +42,12 @@ input UpdatePlayer {
     firstName: String!,
     lastName: String!,
     player: ID!
+}
+
+input RecoverLogin {
+    emailAddress: String!
+    newPassword: String
+    emailToken: ID
 }
 
 enum Role {PLAYER, ADMIN, USER, GUEST}
@@ -67,7 +66,7 @@ input UpdateStatus {
 
 input UpdateTeam {
     name: String!,
-    organization: String!,
+    choices: [String]!,
     team: ID!
 }
 
@@ -82,6 +81,7 @@ type Participant {
     id: ID!,
     player: ID!,
     team: ID!,
+    vote: String
 }
 
 type Player {
@@ -97,17 +97,21 @@ type Player {
 type Team {
     id: ID!,
     name: String!,
-    organization: String,
     organizer: ID!,
     participants: [Participant],
+    choices: [String],
     dateCreated: String
 }
 
 type Vote {
     id: ID!
     participant: ID!,
-    scrum: String!,
-    vote: Int!
+    team: String!,
+    vote: String!
+}
+
+type Recovery {
+    result: String!
 }
 
 interface Result {
@@ -138,13 +142,18 @@ type TeamResult implements Result{
     error: String
 }
 
-type VoteResult implements Result{
-    data: Vote
+type TeamListResult implements ListResult{
+    data: [Team]
     error: String
 }
 
 type VoteListResult implements ListResult{
     data: [Vote]
+    error: String
+}
+
+type RecoveryResult implements Result{
+    data: Recovery
     error: String
 }
 
@@ -157,36 +166,38 @@ type JwtUserDetails {
 
 type Query {
     findById(playerId: ID!): PlayerResult
-    findByEmail( emailAddress: String): PlayerResult
+    findByEmail(emailAddress: String): PlayerResult
     findByUsername(username: String): PlayerResult
     findPlayersByTeam(teamId: ID): PlayerListResult
 
-    findTeamById( teamId: ID): TeamResult
-    findByOrganizer(organizerId: ID!,  teamName: String!): TeamResult
-
-    getScrumVotes( scrum: String): VoteListResult
+    findTeamById(teamId: ID): TeamResult
+    findTeamByName(organizerId: ID!, teamName: String!): TeamResult
+    findTeamsByOrganizer(organizerId: ID!): TeamListResult
+    findTeamsJoined(playerId: ID!): TeamListResult
 }
 
 type Mutation {
     login(emailAddress: String!, password: String!): JwtUserDetails
 
     addAccount(addAccount: AddAccount ): PlayerResult
-    updatePassword( updatePassword: UpdatePassword): PlayerResult
-    createPlayer( createPlayer: CreatePlayer): PlayerResult
+    updatePassword(updatePassword: UpdatePassword): PlayerResult
+    createPlayer(createPlayer: CreatePlayer): PlayerResult
     updatePlayer(updatePlayer: UpdatePlayer ): PlayerResult
     updateStatus(updateStatus: UpdateStatus ):PlayerResult
     updateRole(updateRole: UpdateRole ):PlayerResult
     deletePlayer(playerId: ID ): IntResult
+    recoverLogin(recoverLogin: RecoverLogin): RecoveryResult
 
-    createTeam( createTeam: CreateTeam!): TeamResult
-    updateTeam( updateTeam: UpdateTeam!): TeamResult
-    addParticipant( addParticipant: AddParticipant!): TeamResult
-    dropParticipant( dropParticipant: DropParticipant!): TeamResult
+    createTeam(createTeam: CreateTeam!): TeamResult
+    updateTeam(updateTeam: UpdateTeam!): TeamResult
+    addParticipant(addParticipant: AddParticipant!): TeamResult
+    dropParticipant(dropParticipant: DropParticipant!): TeamResult
     clearParticipants(teamId: ID!): TeamResult
     dropTeam(teamId: ID!): IntResult
+    joinTeam(playerId: ID!, teamId: ID!): TeamResult
+    submitVote(submitVote: SubmitVote): TeamResult
 
-    submitVote( submitVote: SubmitVote): VoteResult
-    publishVotes( scrum: String): Boolean
+    publishVotes(teamId: ID!): Boolean
 }
 
 type Subscription {

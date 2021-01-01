@@ -1,27 +1,26 @@
 package com.dais.scrum.estimate.domain;
 
+import com.dais.scrum.estimate.entity.Participant;
+import com.dais.scrum.estimate.entity.Team;
 import com.dais.scrum.estimate.entity.Vote;
 import lombok.Data;
 
-import java.math.BigDecimal;
+import java.util.Optional;
 import java.util.UUID;
+import java.util.function.Function;
 import java.util.function.Supplier;
 
 @Data
-public class SubmitVote implements Supplier<Vote> {
+public class SubmitVote implements Function<Team, Team> {
 
     private UUID participant;
-    private String scrum;
-    private BigDecimal vote;
-    private UUID voteId;
+    private UUID team;
+    private String vote;
 
     @Override
-    public Vote get() {
-        return Vote.builder()
-                .participant(getParticipant())
-                .scrum(getScrum())
-                .vote(getVote())
-                .id(getVoteId())
-                .build();
+    public Team apply(Team team) {
+        Optional<Participant> participant = team.getParticipants().stream().filter(p -> p.getId().equals(getParticipant())).findFirst();
+        participant.ifPresent(value -> value.setVote(getVote()));
+        return team;
     }
 }

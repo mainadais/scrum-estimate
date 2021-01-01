@@ -10,13 +10,13 @@ import java.util.function.Function;
 public class UpdateTeam implements Function<Team, Team> {
 
     private String name;
-    private String organization;
+    private String[] choices;
     private UUID team;
 
     @Override
     public Team apply(Team team) {
         team.setName(getName());
-        team.setOrganization(getOrganization());
+        team.setChoices(getChoices());
         return team;
     }
 }

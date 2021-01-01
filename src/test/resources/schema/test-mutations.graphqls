@@ -129,13 +129,13 @@ mutation deletePlayer {
 mutation createTeam {
     createTeam(createTeam: {
         name: "cassie_team_z",
-        organization: "cassie banks",
+        choices: ["A","B","C","D","E","F"],
         organizer: "6bf437e1-1b71-469c-8537-700665a279de",
     }){
         data{
             id
             name
-            organization
+            choices
             organizer
         }
     }
@@ -144,13 +144,13 @@ mutation createTeam {
 mutation updateTeam {
     updateTeam(updateTeam: {
         name: "cassie_team_zz",
-        organization: "cassie chance",
+        choices: ["one","two","three","four","five","six","seven"],
         team: "3a97899d-c987-4c1b-a18a-6362239f162d"
     }){
         data{
             id
             name
-            organization
+            choices
             organizer
         }
     }
@@ -164,7 +164,7 @@ mutation addParticipant {
         data{
             id
             name
-            organization
+            choices
             organizer
             participants{
                 id
@@ -183,7 +183,7 @@ mutation dropParticipant {
         data{
             id
             name
-            organization
+            choices
             organizer
             participants{
                 id
@@ -200,7 +200,7 @@ mutation clearParticipants {
         data{
             id
             name
-            organization
+            choices
             organizer
             participants{
                 id
@@ -218,19 +218,40 @@ mutation dropTeam {
     }
 }
 
+mutation joinTeam {
+    joinTeam(playerId: "cf5c44ea-fea8-4507-981b-08308cd4c0ce",
+        teamId: "fba3e41b-bd2c-4248-9c9f-9a805a6b6bb6"){
+        data{
+            id
+            name
+            choices
+            organizer
+            participants{
+                id
+                player
+                team
+            }
+        }
+    }
+}
+
 mutation submitVote {
     submitVote(submitVote: {
         participant: "cf5c44ea-fea8-4507-981b-08308cd4c0ce",
-        scrum: "cassie scrum",
-        vote: 20,
-        voteId: "fba3e41b-bd2c-4248-9c9f-9a805a6b6bb6"
+        vote: "20",
+        team: "fba3e41b-bd2c-4248-9c9f-9a805a6b6bb6"
     }
     ){
         data{
             id
-            participant
-            scrum
-            vote
+            name
+            choices
+            organizer
+            participants{
+                id
+                player
+                team
+            }
         }
     }
 }

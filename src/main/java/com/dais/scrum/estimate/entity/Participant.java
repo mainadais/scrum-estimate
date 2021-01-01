@@ -20,4 +20,5 @@ public class Participant {
     private UUID id;
     private UUID player;
     private UUID team;
+    private String vote;
 }

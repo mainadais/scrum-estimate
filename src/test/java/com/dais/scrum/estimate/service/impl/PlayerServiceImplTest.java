@@ -137,7 +137,7 @@ public class PlayerServiceImplTest {
         Result<Player> player = playerService.findByUsername("cassie");
         assertThat(player.getData(), IsNull.notNullValue());
 
-        Result<Team> team = teamService.findByOrganizer(player.getData().getId(), "cassie_team_1");
+        Result<Team> team = teamService.findTeamByName(player.getData().getId(), "cassie_team_1");
         Result<List<Player>> teamPlayers = playerService.findPlayersByTeam(team.getData().getId());
         assertThat(teamPlayers.getData().size(), Is.is(4));
     }

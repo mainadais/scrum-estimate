@@ -7,42 +7,47 @@ import org.springframework.security.access.prepost.PreAuthorize;
 
 import java.util.UUID;
 
-public interface PlayerMutations {
+public interface PlayerMutations extends ResultHandler {
 
     PlayerService getPlayerService();
 
     @PreAuthorize("isAnonymous()")
     default Result<Player> addAccount(AddAccount addAccount) {
-        return getPlayerService().addAccount(addAccount);
+        return sendResponse(getPlayerService().addAccount(addAccount));
     }
 
     @PreAuthorize("isAuthenticated()")
     default Result<Player> updatePassword(UpdatePassword updatePassword) {
-        return getPlayerService().updatePassword(updatePassword);
+        return sendResponse(getPlayerService().updatePassword(updatePassword));
     }
 
     @PreAuthorize("isAnonymous()")
     default Result<Player> createPlayer(CreatePlayer createPlayer) {
-        return getPlayerService().createPlayer(createPlayer);
+        return sendResponse(getPlayerService().createPlayer(createPlayer));
+    }
+
+    @PreAuthorize("isAnonymous()")
+    default Result<Recovery> recoverLogin(RecoverLogin recoverLogin) {
+        return sendResponse(getPlayerService().recoverLogin(recoverLogin));
     }
 
     @PreAuthorize("isAuthenticated()")
     default Result<Player> updatePlayer(UpdatePlayer updatePlayer) {
-        return getPlayerService().updatePlayer(updatePlayer);
+        return sendResponse(getPlayerService().updatePlayer(updatePlayer));
     }
 
     @PreAuthorize("hasAuthority('ADMIN')")
     default Result<Player> updateStatus(UpdateStatus updateStatus) {
-        return getPlayerService().updateStatus(updateStatus);
+        return sendResponse(getPlayerService().updateStatus(updateStatus));
     }
 
     @PreAuthorize("hasAuthority('ADMIN')")
     default Result<Player> updateRole(UpdateRole updateRole) {
-        return getPlayerService().updateRole(updateRole);
+        return sendResponse(getPlayerService().updateRole(updateRole));
     }
 
     @PreAuthorize("hasAuthority('ADMIN')")
     default Result<Integer> deletePlayer(UUID playerId) {
-        return getPlayerService().deletePlayer(playerId);
+        return sendResponse(getPlayerService().deletePlayer(playerId));
     }
 }

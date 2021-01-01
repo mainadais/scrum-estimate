@@ -1,6 +1,5 @@
-package com.dais.scrum.estimate.resolver;
+package com.dais.scrum.estimate.domain;
 
-import com.dais.scrum.estimate.domain.Result;
 import lombok.Data;
 
 import java.util.List;

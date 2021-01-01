@@ -1,7 +1,7 @@
 package com.dais.scrum.estimate.service;
 
 import com.dais.scrum.estimate.entity.Vote;
-import com.dais.scrum.estimate.resolver.ListResult;
+import com.dais.scrum.estimate.domain.ListResult;
 import io.reactivex.ObservableEmitter;
 import lombok.Setter;
 import org.springframework.stereotype.Component;

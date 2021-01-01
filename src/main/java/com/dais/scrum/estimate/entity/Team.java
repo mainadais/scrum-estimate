@@ -21,8 +21,8 @@ public class Team {
     @Id
     private UUID id;
     private String name;
-    private String organization;
     private UUID organizer;
     private List<Participant> participants;
+    private String[] choices;
     private Date dateCreated;
 }

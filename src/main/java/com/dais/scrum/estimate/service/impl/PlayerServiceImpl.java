@@ -5,7 +5,9 @@ import com.dais.scrum.estimate.entity.Account;
 import com.dais.scrum.estimate.entity.Player;
 import com.dais.scrum.estimate.repository.PlayerRepository;
 import com.dais.scrum.estimate.service.PlayerService;
+import com.github.benmanes.caffeine.cache.Cache;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -19,6 +21,8 @@ public class PlayerServiceImpl implements PlayerService {
 
     final PlayerRepository playerRepository;
     final PasswordEncoder passwordEncoder;
+    @Qualifier("recoveryCache")
+    final Cache<String, RecoverLogin> recoveryCache;
 
     @Override
     public Result<Player> findById(UUID playerId) {
@@ -77,6 +81,7 @@ public class PlayerServiceImpl implements PlayerService {
         try {
             Result<Player> find = findById(updatePassword.getPlayer());
             if (find.getData() != null) {
+                updatePassword.setNewPassword(passwordEncoder.encode(updatePassword.getNewPassword()));
                 Player player = updatePassword.apply(find.getData());
                 return new Some<>(playerRepository.save(player));
             }
@@ -151,6 +156,43 @@ public class PlayerServiceImpl implements PlayerService {
         try {
             playerRepository.deleteById(playerId);
             return new Some<>(1);
+        } catch (Exception e) {
+            return new None<>(e.getCause() != null ? e.getCause().getMessage() : e.getMessage());
+        }
+    }
+
+    @Override
+    public Result<Recovery> recoverLogin(RecoverLogin recoverLogin) {
+        try {
+            RecoverLogin cached = recoveryCache.getIfPresent(recoverLogin.getEmailAddress());
+            if (cached == null) {
+                UUID emailToken = UUID.randomUUID();
+                recoverLogin.setEmailToken(emailToken);
+                recoveryCache.put(recoverLogin.getEmailAddress(), recoverLogin);
+                //send email with recovery link
+                System.out.printf("Recovery email token - %s%n", emailToken);
+                return new Some<>(new Recovery("Email sent with recovery link"));
+            } else if (cached.getEmailToken().equals(recoverLogin.getEmailToken())) {
+                Result<Player> playerResult = findByEmail(recoverLogin.getEmailAddress());
+                if (playerResult.getData() != null) {
+                    Player player = playerResult.getData();
+                    player.getAccount().setPassword(passwordEncoder.encode(recoverLogin.getNewPassword()));
+                    try {
+                        playerRepository.save(player);
+                        recoveryCache.invalidate(recoverLogin.getEmailAddress());
+                        return new Some<>(new Recovery("Password updated successfully"));
+                    } catch (Exception e) {
+                        recoveryCache.invalidate(recoverLogin.getEmailAddress());
+                        return new None<>(String.format("Recovery failed - %s", e.getMessage()));
+                    }
+                } else {
+                    recoveryCache.invalidate(recoverLogin.getEmailAddress());
+                    return new None<>("No user available with supplied email");
+                }
+            } else {
+                recoveryCache.invalidate(recoverLogin.getEmailAddress());
+                return new None<>("Recovery token supplied does not match that sent to your email");
+            }
         } catch (Exception e) {
             return new None<>(e.getCause() != null ? e.getCause().getMessage() : e.getMessage());
         }

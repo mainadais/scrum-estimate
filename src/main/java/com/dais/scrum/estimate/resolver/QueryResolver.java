@@ -10,7 +10,7 @@ import org.springframework.stereotype.Component;
 
 @Component
 @AllArgsConstructor
-public class QueryResolver implements GraphQLQueryResolver, TeamQueries, PlayerQueries, VoteQueries {
+public class QueryResolver implements GraphQLQueryResolver, TeamQueries, PlayerQueries {
 
     final PlayerService playerService;
     final TeamService teamService;
@@ -25,10 +25,5 @@ public class QueryResolver implements GraphQLQueryResolver, TeamQueries, PlayerQ
     @Override
     public PlayerService getPlayerService() {
         return this.playerService;
-    }
-
-    @Override
-    public VoteService getVoteService() {
-        return this.voteService;
     }
 }

@@ -9,7 +9,7 @@
 	"findByUsername": {
 	  "username": "cassie"
 	},
-	"findByOrganizer": {
+	"findTeamByName": {
 	  "organizerId": "6bf437e1-1b71-469c-8537-700665a279de",
 	  "teamName": "cassie_team_1"
 	},
@@ -19,21 +19,18 @@
 	"findTeamById": {
 	  "teamId": "a216d5bb-43ef-455c-b018-b1e99aa39cc9"
 	},
-	"getScrumVotes": {
-	  "scrum": "cassie scrum"
-	},
 	"createPlayer": {
-	  "createPlayer":{
+	  "createPlayer": {
 		"emailAddress": "kijana_email@email.com",
 		"firstName": "Kijana",
 		"lastName": "mzee"
 	  }
 	},
-	"addAccount":{
-	  "addAccount":{
+	"addAccount": {
+	  "addAccount": {
 		"username": "kijana",
 		"password": "kijana_pass",
-		"player":"9bf67225-08d8-4b84-b801-10c2a63c08ed"
+		"player": "9bf67225-08d8-4b84-b801-10c2a63c08ed"
 	  }
 	}
   },
@@ -77,12 +74,12 @@
 	  },
 	  "error": null
 	},
-	"findByOrganizer": {
+	"findTeamByName": {
 	  "data": {
 		"id": "a216d5bb-43ef-455c-b018-b1e99aa39cc9",
 		"name": "cassie_team_1",
 		"organizer": "6bf437e1-1b71-469c-8537-700665a279de",
-		"organization": null,
+		"choices": [],
 		"dateCreated": "2020-11-15 12:30:21.076863",
 		"participants": [
 		  {
@@ -143,7 +140,7 @@
 	"data": {
 	  "id": "a216d5bb-43ef-455c-b018-b1e99aa39cc9",
 	  "name": "cassie_team_1",
-	  "organization": null,
+	  "choices": [],
 	  "organizer": "6bf437e1-1b71-469c-8537-700665a279de",
 	  "participants": [
 		{
@@ -170,7 +167,7 @@
 	},
 	"error": null
   },
-  "getScrumVotes": {
+  "findTeamByName": {
 	"data": [
 	  {
 		"id": "fba3e41b-bd2c-4248-9c9f-9a805a6b6bb6",
@@ -292,7 +289,15 @@
 	  "data": {
 		"id": "856a8aea-f35a-491f-bfb3-c5f855264ed3",
 		"name": "cassie_team_z",
-		"organization": "cassie banks",
+		"choices": [
+		  "A",
+		  "B",
+		  "C",
+		  "D",
+		  "E",
+		  "F",
+		  "G"
+		],
 		"organizer": "6bf437e1-1b71-469c-8537-700665a279de",
 		"participants": null
 	  }
@@ -301,7 +306,15 @@
 	  "data": {
 		"id": "856a8aea-f35a-491f-bfb3-c5f855264ed3",
 		"name": "cassie_team_zz",
-		"organization": "cassie chance",
+		"choices": [
+		  "A",
+		  "B",
+		  "C",
+		  "D",
+		  "E",
+		  "F",
+		  "G"
+		],
 		"organizer": "6bf437e1-1b71-469c-8537-700665a279de"
 	  }
 	},
@@ -309,7 +322,15 @@
 	  "data": {
 		"id": "856a8aea-f35a-491f-bfb3-c5f855264ed3",
 		"name": "cassie_team_zz",
-		"organization": "cassie chance",
+		"choices": [
+		  "A",
+		  "B",
+		  "C",
+		  "D",
+		  "E",
+		  "F",
+		  "G"
+		],
 		"organizer": "6bf437e1-1b71-469c-8537-700665a279de",
 		"participants": [
 		  {
@@ -324,7 +345,15 @@
 	  "data": {
 		"id": "856a8aea-f35a-491f-bfb3-c5f855264ed3",
 		"name": "cassie_team_zz",
-		"organization": "cassie chance",
+		"choices": [
+		  "a",
+		  "b",
+		  "c",
+		  "d",
+		  "e",
+		  "f",
+		  "g"
+		],
 		"organizer": "6bf437e1-1b71-469c-8537-700665a279de",
 		"participants": []
 	  }
@@ -333,7 +362,15 @@
 	  "data": {
 		"id": "856a8aea-f35a-491f-bfb3-c5f855264ed3",
 		"name": "cassie_team_zz",
-		"organization": "cassie chance",
+		"choices": [
+		  "A",
+		  "B",
+		  "C",
+		  "D",
+		  "E",
+		  "F",
+		  "G"
+		],
 		"organizer": "6bf437e1-1b71-469c-8537-700665a279de",
 		"participants": []
 	  }

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import Avatar from "@material-ui/core/Avatar";
 import Typography from "@material-ui/core/Typography";
@@ -10,6 +10,8 @@ import Link from "@material-ui/core/Link";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
 import Checkbox from "@material-ui/core/Checkbox";
 import { useHistory } from "react-router";
+import { useScrum } from "../context/ScrumProvider";
+import useLocalStorage from "../hooks/useLocalStorage";
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -31,9 +33,12 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-function SignInForm({handleLogin}) {
+function SignInForm() {
   const classes = useStyles();
   const history = useHistory();
+
+  const { signIn } = useScrum();
+  const [loginForm, saveForm] = useLocalStorage("login", {});
 
   const navigateTo = (e, path) => {
     e.preventDefault();
@@ -43,16 +48,23 @@ function SignInForm({handleLogin}) {
   const [form, setForm] = useState({
     emailAddress: "",
     password: "",
+    remember: false,
+    ...loginForm,
   });
 
   const handleSubmit = (e) => {
-    e.preventDefault()
-    handleLogin(form)
+    e.preventDefault();
+    saveForm(form.remember ? form : {});
+    signIn(form);
   };
 
   const handleChange = (e) => {
     const id = e.target.id;
     setForm({ ...form, [id]: e.target.value });
+  };
+
+  const handleRemember = (e) => {
+    setForm({ ...form, remember: e.target.checked });
   };
 
   return (
@@ -91,7 +103,15 @@ function SignInForm({handleLogin}) {
           onChange={handleChange}
         />
         <FormControlLabel
-          control={<Checkbox value="remember" color="primary" />}
+          control={
+            <Checkbox
+              id="remember"
+              checked={form.remember}
+              value="remember"
+              color="primary"
+              onClick={handleRemember}
+            />
+          }
           label="Remember me"
         />
         <Button
@@ -106,7 +126,11 @@ function SignInForm({handleLogin}) {
         </Button>
         <Grid container>
           <Grid item xs>
-            <Link href="#" variant="body2">
+            <Link
+              href="#"
+              variant="body2"
+              onClick={(e) => navigateTo(e, "recover")}
+            >
               Forgot password?
             </Link>
           </Grid>

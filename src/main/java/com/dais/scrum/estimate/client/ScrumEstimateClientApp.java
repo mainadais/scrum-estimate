@@ -18,7 +18,7 @@ public class ScrumEstimateClientApp {
         GraphQLClient plainClient = ac.getBean("plainClient", GraphQLClient.class);
         login(plainClient);
 
-        if(!tokenOnly) {
+        if (!tokenOnly) {
             GraphQLClient tokenClient = ac.getBean(GraphQLClient.class);
             findByEmail(tokenClient);
         }

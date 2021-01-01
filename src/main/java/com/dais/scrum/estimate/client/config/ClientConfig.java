@@ -14,7 +14,7 @@ import org.springframework.context.annotation.Primary;
 @Setter
 public class ClientConfig {
 
-    final String bearerToken = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJjYXNzaWVfZW1haWxAZW1haWwuY29tIiwiaXNzIjoic2NydW0tZXN0aW1hdGUiLCJleHAiOjE2MDU3NTE0NzEsImlhdCI6MTYwNTczNzA3MX0.v2C_RUm6kO7IkCIHxRP-BH3rnbU70stKeUXiZfdEhQA";
+    final String bearerToken = "ADD_TOKEN_HERE";
     @Value("${gql.server.app.host:localhost}")
     String host;
     @Value("${gql.server.app.port:7080}")

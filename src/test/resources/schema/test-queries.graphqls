@@ -72,7 +72,7 @@ query findTeamById ($teamId: ID!){
         data{
             id
             name
-            organization
+            choices
             organizer
             participants{
                 id
@@ -84,12 +84,12 @@ query findTeamById ($teamId: ID!){
     }
 }
 
-query findByOrganizer ($organizerId: ID!, $teamName: String!){
-    findByOrganizer (organizerId: $organizerId, teamName: $teamName){
+query findTeamByName ($organizerId: ID!, $teamName: String!){
+    findTeamByName (organizerId: $organizerId, teamName: $teamName){
         data{
             id
             name
-            organization
+            choices
             organizer
             participants{
                 id
@@ -101,13 +101,35 @@ query findByOrganizer ($organizerId: ID!, $teamName: String!){
     }
 }
 
-query getScrumVotes ($scrum: String!){
-    getScrumVotes (scrum: $scrum){
+query findTeamsByOrganizer ($organizerId: ID!){
+    findTeamsByOrganizer (organizerId: $organizerId){
         data{
             id
-            participant
-            scrum
-            vote
+            name
+            choices
+            organizer
+            participants{
+                id
+                player
+                team
+            }
+        }
+        error
+    }
+}
+
+query findTeamsJoined ($playerId: ID!){
+    findTeamsJoined (playerId: $playerId){
+        data{
+            id
+            name
+            choices
+            organizer
+            participants{
+                id
+                player
+                team
+            }
         }
         error
     }

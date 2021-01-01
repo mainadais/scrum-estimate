@@ -1,12 +1,14 @@
 package com.dais.scrum.estimate.service.impl;
 
 import com.dais.scrum.estimate.domain.*;
+import com.dais.scrum.estimate.entity.Participant;
 import com.dais.scrum.estimate.entity.Team;
 import com.dais.scrum.estimate.repository.TeamRepository;
 import com.dais.scrum.estimate.service.TeamService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -30,9 +32,27 @@ public class TeamServiceImpl implements TeamService {
     }
 
     @Override
-    public Result<Team> findByOrganizer(UUID organizerId, String teamName) {
+    public Result<Team> findTeamByName(UUID organizerId, String teamName) {
         try {
-            return new Some<>(teamRepository.findByOrganizer(organizerId, teamName));
+            return new Some<>(teamRepository.findTeamByName(organizerId, teamName));
+        } catch (Exception e) {
+            return new None<>(e.getCause() != null ? e.getCause().getMessage() : e.getMessage());
+        }
+    }
+
+    @Override
+    public Result<List<Team>> findTeamsByOrganizer(UUID organizerId) {
+        try {
+            return new Some<>(teamRepository.findTeamsByOrganizer(organizerId));
+        } catch (Exception e) {
+            return new None<>(e.getCause() != null ? e.getCause().getMessage() : e.getMessage());
+        }
+    }
+
+    @Override
+    public Result<List<Team>> findTeamsJoined(UUID playerId) {
+        try {
+            return new Some<>(teamRepository.findTeamsJoined(playerId));
         } catch (Exception e) {
             return new None<>(e.getCause() != null ? e.getCause().getMessage() : e.getMessage());
         }
@@ -105,6 +125,44 @@ public class TeamServiceImpl implements TeamService {
         try {
             teamRepository.deleteById(teamId);
             return new Some<>(1);
+        } catch (Exception e) {
+            return new None<>(e.getCause() != null ? e.getCause().getMessage() : e.getMessage());
+        }
+    }
+
+    @Override
+    public Result<Team> joinTeam(UUID playerId, UUID teamId) {
+        try {
+            Optional<Team> teamById = teamRepository.findById(teamId);
+            if (teamById.isPresent()) {
+                Optional<Participant> existingParticipant = teamById.get().getParticipants().stream().filter(player -> player.getPlayer().equals(playerId)).findFirst();
+                if (existingParticipant.isPresent()) {
+                    return new Some<>(teamById.get());
+                }
+                //create new participant
+                Participant newParticipant = Participant.builder()
+                        .player(playerId)
+                        .team(teamId)
+                        .build();
+                Team teamToJoin = teamById.get();
+                teamToJoin.getParticipants().add(newParticipant);
+                //update team with participant
+                return new Some<>(teamRepository.save(teamToJoin));
+            }
+            return new None<>("No team exists with given team id");
+        } catch (Exception e) {
+            return new None<>(e.getCause() != null ? e.getCause().getMessage() : e.getMessage());
+        }
+    }
+
+    @Override
+    public Result<Team> submitVote(SubmitVote submitVote) {
+        try {
+            Result<Team> team = findById(submitVote.getTeam());
+            if (team.getData() != null) {
+                return new Some<>(teamRepository.save(submitVote.apply(team.getData())));
+            }
+            return team;
         } catch (Exception e) {
             return new None<>(e.getCause() != null ? e.getCause().getMessage() : e.getMessage());
         }
